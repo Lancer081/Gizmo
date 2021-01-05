@@ -12,6 +12,8 @@ U64 getZobristKey(Board* board)
 {
     U64 finalKey = 0ULL;
     U64 bitboard = 0ULL;
+    
+    int square = 0;
 
     for (int piece = P; piece <= k; piece++)
     {
@@ -19,7 +21,7 @@ U64 getZobristKey(Board* board)
 
         while (bitboard)
         {
-            int square = getLSB(bitboard);
+            square = getLSB(bitboard);
             finalKey ^= zobrist[piece][square];
             popBit(bitboard, square);
         }

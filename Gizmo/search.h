@@ -2,21 +2,14 @@
 
 #include "board.h"
 
-U64 fileMasks[SQUARE_NUM];
-U64 rankMasks[SQUARE_NUM];
-U64 wPassedMasks[SQUARE_NUM];
-U64 bPassedMasks[SQUARE_NUM];
-U64 isolatedMasks[SQUARE_NUM];
+#define mateValue 49000
+#define mateScore 48000
 
-static inline int evaluate(Board* board);
 static inline int negamax(Board* board, SearchInfo* info, int depth, int alpha, int beta);
 static inline int quiesce(Board* board, SearchInfo* info, int alpha, int beta);
 
-static int sortMoves(Board* board, MoveList* moves);
-static int scoreMove(Board* board, int move);
-
-void initEvalMasks();
-static U64 setRankFileMask(int fileNum, int rankNum);
+static inline int sortMoves(Board* board, MoveList* moves);
+static inline int scoreMove(Board* board, int move);
 
 static inline int probeHash(Board* board, int depth, int alpha, int beta);
 static inline void writeHashEntry(Board* board, int score, int depth, int flag);
